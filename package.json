@@ -1,0 +1,28 @@
+{
+  "name": "keyon",
+  "version": "0.0.0",
+  "description": "Keyon Framework",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "lib": "lib"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "deepmerge": "^4.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.6.9"
+  },
+  "devDependencies": {
+    "esdoc": "^1.1.0",
+    "esdoc-brand-plugin": "^1.0.1",
+    "esdoc-integrate-manual-plugin": "^1.0.0",
+    "esdoc-node": "^1.0.4",
+    "esdoc-standard-plugin": "^1.0.0"
+  },
+  "scripts": {
+    "docs": "./node_modules/.bin/esdoc"
+  },
+  "author": "Michael Vergoz",
+  "license": "GPL-2.0-only"
+}
