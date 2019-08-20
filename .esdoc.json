@@ -1,0 +1,40 @@
+{
+	"source": "./",
+	"destination": "./docs/core",
+	"excludes": ["(node_modules|docs)"],
+	"plugins": [
+		{"name": "esdoc-node"},
+
+		{
+			"name": "esdoc-standard-plugin",
+			"options": {
+				"accessor": {"access": ["public", "protected", "private"], "autoPrivate": true}
+			}
+		},
+
+		{
+			"name": "esdoc-brand-plugin",
+			"option": {
+				"title": "My Library",
+				"description": "this is awesome library",
+				"repository": "https://github.com/foo/bar",
+				"site": "http://my-library.org",
+				"author": "https://twitter.com/foo"
+			}
+		},
+		{
+			"name": "esdoc-integrate-manual-plugin",
+			"option": {
+				"index": "./docs/index.md",
+				"globalIndex": true,
+				"files": [
+					"./docs/convention.md",
+					"./docs/typing.md",
+					"./docs/pipeline.md",
+					"./docs/drivers.md"
+				]
+			}
+		}
+
+	]
+}
