@@ -1,3 +1,4 @@
+const EventEmitter = require("events").EventEmitter;
 const keyonDB = require("./lib/db.js");
 const keyonSchemas = require("./lib/schemas.js");
 const keyonTypes = require("./lib/types.js");
@@ -18,8 +19,10 @@ UPKEY
 /**
  * Main Keyon Process Class
  */
-class keyon {
+class keyon extends EventEmitter {
 	constructor() {
+		super()
+
 		this.$state = {
 			api: false,
 			cli: false,
@@ -33,6 +36,7 @@ class keyon {
 		this.db = new keyonDB(this);
 		this.schemas = new keyonSchemas(this);
 		this.plugins = new keyonPlugins(this);
+		this.pipeline = keyonPipeline;
 
 		/**
 		 * Referenced roles
@@ -49,12 +53,29 @@ class keyon {
 		this.configs.$fusion(
 			"admin role",
 			"admin",
-			"Select default admi role name"
+			"Select default admin role name"
+		);
+		this.configs.$fusion(
+			"name",
+			"Default",
+			"Site name"
+		);
+		this.configs.$fusion(
+			"brand",
+			"Default",
+			"Brand name"
 		);
 	}
 
 	$init(config) {
 		this.configs.$set(config);
+	}
+
+	/**
+	 * Stop Keyon services as started
+	 */
+	$stop() {
+		this.emit("stop", this);
 	}
 
 	$use(hooker) {
@@ -193,7 +214,9 @@ class keyon {
 
 module.exports = new keyon();
 
+
 // ----------------------------------------------------
+/*
 
 const ko  = module.exports;
 const Types = ko.types;
@@ -285,66 +308,6 @@ ko.schemas.$access('accounts', {
 	noget: true,
 })
 
-/*
-ko.schemas.$fusion('test', {
-	name: {
-		$kind: {
-			type: "Name",
-			index: true,
-		},
-	},
-	friend: {
-		$kind: {
-			type: "Name",
-		},
-	},
-})
-
-ko.schemas.$fusion('test2', {
-	name: {
-		$kind: {
-			type: "Name",
-			index: true,
-		},
-	},
-	job: {
-		$kind: {
-			type: "Text",
-			index: true,
-		},
-	},
-
-	friend: {
-		$kind: {
-			type: "Name",
-		},
-	},
-})
-
-
-ko.schemas.$fusion('test', {
-	friend: {
-		$kind: {
-			type: "Name",
-		},
-
-		$required: true
-	},
-
-	items: [{
-		fieldOne: {
-			$kind: {
-				type: "Name"
-			}
-		},
-		fieldTwo: {
-			$kind: {
-				type: "Name"
-			}
-		}
-	}]
-})
-*/
 
 
 
@@ -362,7 +325,7 @@ ko.$register(() => {
 	})
 
 	//
-/*
+
 	const pipe = new keyonPipeline("test", () => {
 		console.log('YOOOO', pipe.$result())
 	});
@@ -370,9 +333,9 @@ ko.$register(() => {
 	pipe.params.id = "5d5c3a4d18331348cc2a4924";
 	ko.schemas.accounts.$role("admin").get(pipe);
 	pipe.$fifo();
-*/
 
-/*
+
+
 	//
 	const pipe = new keyonPipeline("test", () => {
 		console.log('CREATE', pipe.$result())
@@ -381,8 +344,9 @@ ko.$register(() => {
 	pipe.body.name = "Margoz le";
 	ko.schemas.accounts.$role("admin").create(pipe);
 	pipe.$fifo();
-*/
+
 
 
 	console.log("Application loaded");
 });
+*/
