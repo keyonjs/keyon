@@ -81,4 +81,72 @@ describe('Building Pass', function() {
 		done();
 	});
 
+
+	it('should extends account schema with subobject', function(done) {
+		keyon.schemas.$fusion('accounts', {
+			// piege
+			$required: true,
+
+			email: {
+				$label: "E-mail address",
+				$kind: {
+					type: "Text"
+				},
+				$noupdate: true,
+				$required: true
+			},
+			address: {
+				street: {
+					$label: "Street",
+					$kind: {
+						type: "Text"
+					},
+				},
+				zip: {
+					$label: "ZIP",
+					$kind: {
+						type: "Text"
+					},
+				},
+			},
+
+			// direct array
+			phone: [{
+				$label: "Phone number",
+				$kind: {
+					type: "Text"
+				},
+			}],
+
+			// indirect array
+			stuff: [{
+				description: {
+					$label: "Stuff description",
+					$kind: {
+						type: "Text"
+					}
+				},
+				note: {
+					$label: "Stuff note",
+					$kind: {
+						type: "Text"
+					}
+				},
+			}],
+
+			job: {
+				$label: "Job position",
+				$kind: {
+					type: "Text"
+				}
+			},
+		})
+
+		assert.ok(keyon.schemas.accounts.name === 'accounts');
+		assert.ok(keyon.schemas.accounts.fields.phone);
+		assert.ok(Array.isArray(keyon.schemas.accounts.fields.phone));
+		assert.ok(keyon.schemas.accounts.fields.phone.length == 1);
+		done();
+	});
+
 });
