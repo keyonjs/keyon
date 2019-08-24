@@ -5,6 +5,7 @@ const keyonTypes = require("./lib/types.js");
 const keyonConfigs = require("./lib/configs.js");
 const keyonPlugins = require("./lib/plugins.js");
 const keyonPipeline = require("./lib/pipeline.js");
+const iterator = require("./lib/iterator");
 const pkg = require("./package.json");
 
 /*
@@ -107,7 +108,6 @@ class keyon extends EventEmitter {
 	$register(cb) {
 		// already registered
 		if(this._registered === true) {
-			if(cb) cb()
 			return;
 		}
 
@@ -115,27 +115,21 @@ class keyon extends EventEmitter {
 		this.$role(this.configs.$get("public role"), "Default public role")
 		this.$role(this.configs.$get("admin role"), "Default admin role")
 
-		// use a pipe to start registering
-		const pipe = new keyonPipeline("register", cb);
 		const self = this;
 
-		// prepare models
-		pipe.$push(() => {
-			self.schemas._prepare(() => {
-				console.log("Schemas loaded and ready to use");
-				pipe.$fifo();
-			});
+		const list = [
+			(next) => {
+				self.schemas._prepare(() => {
+					console.log("Schemas loaded and ready to use");
+					next();
+				});
+			}
+		]
+
+		iterator.sync(list, () => {
+			self._registered = true;
+			if(cb) cb();
 		})
-
-		// load initial data
-		pipe.$push(() => {
-			pipe.$fifo();
-		})
-
-		// run the fifo pipe
-		pipe.$fifo();
-
-		self._registered = true;
 	}
 
 
