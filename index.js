@@ -5,6 +5,7 @@ const keyonTypes = require("./lib/types.js");
 const keyonConfigs = require("./lib/configs.js");
 const keyonPlugins = require("./lib/plugins.js");
 const keyonPipeline = require("./lib/pipeline.js");
+const pkg = require("./package.json");
 
 /*
 UPKEY
@@ -37,6 +38,8 @@ class keyon extends EventEmitter {
 		this.schemas = new keyonSchemas(this);
 		this.plugins = new keyonPlugins(this);
 		this.pipeline = keyonPipeline;
+
+		this.package = pkg;
 
 		/**
 		 * Referenced roles
@@ -308,45 +311,4 @@ ko.schemas.$access('accounts', {
 	noget: true,
 })
 
-
-
-
-
-// prepare schema and connect to the database
-ko.$register(() => {
-
-	ko.schemas.accounts.model.findOne().lean().exec((err, unit) => {
-		if(!unit) {
-			const direct = new ko.schemas.accounts.model({name: "michael"});
-			direct.save(() => {
-
-			})
-		}
-	})
-
-	//
-
-	const pipe = new keyonPipeline("test", () => {
-		console.log('YOOOO', pipe.$result())
-	});
-	pipe.role = "admin";
-	pipe.params.id = "5d5c3a4d18331348cc2a4924";
-	ko.schemas.accounts.$role("admin").get(pipe);
-	pipe.$fifo();
-
-
-
-	//
-	const pipe = new keyonPipeline("test", () => {
-		console.log('CREATE', pipe.$result())
-	});
-	pipe.role = "admin";
-	pipe.body.name = "Margoz le";
-	ko.schemas.accounts.$role("admin").create(pipe);
-	pipe.$fifo();
-
-
-
-	console.log("Application loaded");
-});
 */

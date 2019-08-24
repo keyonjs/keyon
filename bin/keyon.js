@@ -4,7 +4,7 @@
 const fs = require('fs');
 const program = require('subcommander');
 const debug = require('debug')('keyon:cli');
-const gatejs = require("../index");
+const keyon = require("../index");
 
 console.log("Loading Keyon CLI Interface");
 
@@ -22,7 +22,14 @@ for(var a in dirs) {
 program.command('version', {
 	desc: 'Current version',
 	callback: function () {
-		console.log(' Keyon - v' + gatejs.package.version + ' (c) 2019 - Michael Vergoz');
+		console.log(' Keyon - v' + keyon.package.version + ' (c) 2019 - Michael Vergoz');
+	},
+});
+
+program.command('serve', {
+	desc: 'Serve Keyon',
+	callback: function () {
+		console.log(' TODO');
 	},
 });
 

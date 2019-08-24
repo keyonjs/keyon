@@ -26,8 +26,9 @@
 			"name": "esdoc-integrate-manual-plugin",
 			"option": {
 				"index": "./docs/index.md",
-				"globalIndex": true,
+				"globalIndex": false,
 				"files": [
+					"./docs/getting-started/index.md",
 					"./docs/convention.md",
 					"./docs/typing.md",
 					"./docs/pipeline.md",

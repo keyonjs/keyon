@@ -16,6 +16,12 @@ describe('Building Pass', function() {
 
 	it('should reference an account schema', function(done) {
 		keyon.schemas.$fusion('accounts', {
+			instance: {
+				$label: "Current instance",
+				$kind: {
+					type: "Number"
+				},
+			},
 			name: {
 				$label: "Text",
 				$kind: {
@@ -97,6 +103,7 @@ describe('Building Pass', function() {
 			},
 			address: {
 				street: {
+					$search: true,
 					$label: "Street",
 					$kind: {
 						type: "Text"

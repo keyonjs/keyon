@@ -9,14 +9,15 @@
   },
   "dependencies": {
     "body-parser": "^1.19.0",
+    "debug": "^4.1.1",
     "deepmerge": "^4.0.0",
     "express": "^4.17.1",
-    "mongoose": "^5.6.9"
+    "mongoose": "^5.6.9",
+    "subcommander": "^1.0.0"
   },
   "devDependencies": {
     "esdoc": "^1.1.0",
     "esdoc-brand-plugin": "^1.0.1",
-    "esdoc-custom-theme": "^1.4.2",
     "esdoc-inject-style-plugin": "^1.0.0",
     "esdoc-integrate-manual-plugin": "^1.0.0",
     "esdoc-node": "^1.0.4",

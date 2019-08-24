@@ -101,6 +101,36 @@ describe('Testing Intermediate API Control', function() {
 			assert.ok(raw.data._id);
 		})
 
+		it('should create 10 accounts', function(done) {
+			var index = 10;
+			function createAccount() {
+				if(index == 0) {
+					done();
+					return;
+				}
+
+				const pipe = new keyon.pipeline("test", () => {
+					const res = pipe.$result();
+					if(res.error === true) {
+						done("Errored #"+res.code+": "+res.message);
+						return;
+					}
+					index--;
+					process.nextTick(createAccount)
+				});
+
+				pipe.role = "admin";
+				pipe.body.name = "Michael VERGOZ ("+index+")";
+				pipe.body.email = "m.vergoz@vergoz.ch";
+				keyon.schemas.accounts.$role("admin").create(pipe);
+				pipe.$fifo();
+			}
+
+			createAccount();
+		});
+
+
+
 	})
 
 	// get
@@ -216,6 +246,24 @@ describe('Testing Intermediate API Control', function() {
 
 			pipe.params.id = doc.data.id;
 			keyon.schemas.accounts.$role("admin").delete(pipe);
+			pipe.$fifo();
+		});
+	})
+
+
+	describe('Admin Role List', function() {
+		it('should list documents without any filter/search', function(done) {
+			const pipe = new keyon.pipeline("test", () => {
+				const res = pipe.$result();
+				if(res.error === true) {
+					done("Errored #"+res.code+": "+res.message);
+					return;
+				}
+				console.log("list", res.data);
+				done();
+			});
+
+			keyon.schemas.accounts.$role("admin").list(pipe);
 			pipe.$fifo();
 		});
 	})
