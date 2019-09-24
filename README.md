@@ -1,4 +1,4 @@
-[![Keyon Logo](./docs/logo.png)](https://keyon.io/)
+[![Keyon Logo](https://raw.githubusercontent.com/keyonjs/keyon/master/docs/logo.png)](https://keyon.io/)
 
 
 ## Installation
