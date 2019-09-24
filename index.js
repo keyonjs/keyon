@@ -1,6 +1,7 @@
 const EventEmitter = require("events").EventEmitter;
 const keyonDB = require("./lib/db.js");
-const keyonSchemas = require("./lib/schemas.js");
+const keyonInterfaceSchemas = require("./interface/schemas.js");
+const keyonInterfaceControllers = require("./interface/controllers.js");
 const keyonTypes = require("./lib/types.js");
 const keyonConfigs = require("./lib/configs.js");
 const keyonPlugins = require("./lib/plugins.js");
@@ -36,7 +37,8 @@ class keyon extends EventEmitter {
 		this.configs = new keyonConfigs(this);
 		this.types = new keyonTypes(this);
 		this.db = new keyonDB(this);
-		this.schemas = new keyonSchemas(this);
+		this.schemas = new keyonInterfaceSchemas(this);
+		this.controllers = new keyonInterfaceControllers(this);
 		this.plugins = new keyonPlugins(this);
 		this.pipeline = keyonPipeline;
 
@@ -47,6 +49,12 @@ class keyon extends EventEmitter {
 		 * @type {Object}
 		 */
 		this._roles = {}
+
+		this.configs.$fusion(
+			"default driver",
+			"mongodb",
+			"Internet ORM default driver"
+		);
 
 		// place public role configuration
 		this.configs.$fusion(

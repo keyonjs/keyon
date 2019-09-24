@@ -5,9 +5,9 @@ const Types = keyon.types;
 var doc;
 var raw;
 
-describe('Testing Intermediate API Control', function() {
+describe('Schemas > Controller > Role: Library', function() {
 
-	describe('Admin Role Options', function() {
+	describe('Admin Options', function() {
 		it('should get schema admin role options', function(done) {
 			const pipe = new keyon.pipeline("test", () => {
 				const res = pipe.$result();
@@ -23,7 +23,7 @@ describe('Testing Intermediate API Control', function() {
 		});
 	})
 
-	describe('Admin Role Creation', function() {
+	describe('Admin Creation', function() {
 		// create
 		it('should generate an error while creation', function(done) {
 			const pipe = new keyon.pipeline("test", () => {
@@ -134,7 +134,7 @@ describe('Testing Intermediate API Control', function() {
 	})
 
 	// get
-	describe('Admin Role Getter', function() {
+	describe('Admin Getter', function() {
 		// create
 		it('should get a document', function(done) {
 			const pipe = new keyon.pipeline("test", () => {
@@ -183,7 +183,7 @@ describe('Testing Intermediate API Control', function() {
 		})
 	})
 
-	describe('Admin Role Update', function() {
+	describe('Admin Update', function() {
 		it('should update a document', function(done) {
 			const pipe = new keyon.pipeline("test", () => {
 				const res = pipe.$result();
@@ -233,7 +233,7 @@ describe('Testing Intermediate API Control', function() {
 		})
 	})
 
-	describe('Admin Role Delete', function() {
+	describe('Admin Delete', function() {
 		it('should delete a document', function(done) {
 			const pipe = new keyon.pipeline("test", () => {
 				const res = pipe.$result();
@@ -250,8 +250,7 @@ describe('Testing Intermediate API Control', function() {
 		});
 	})
 
-
-	describe('Admin Role List', function() {
+	describe('Admin List', function() {
 		it('should list documents without any filter/search', function(done) {
 			const pipe = new keyon.pipeline("test", () => {
 				const res = pipe.$result();

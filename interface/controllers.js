@@ -1,11 +1,15 @@
-const keyonController = require("./controller");
-const iterator = require("./iterator");
-const debug = require("debug")("keyon:schemas");
+const keyonController = require("../lib/controller");
+const iterator = require("../lib/iterator");
+const debug = require("debug")("keyon:interface:controllers");
+
 
 /**
- * Schemas management
+ * Controller interface management
+ *
+ * Generic object allowing to regroup all schemas controllers in the same place.
+ * It looks like a schemas router.
  */
-class keyonSchemas {
+class keyonInterfaceControllers {
 	constructor(root) {
 		this._root = root;
 
@@ -19,7 +23,7 @@ class keyonSchemas {
 	_node(schema) {
 		if(!this.$org[schema]) {
 			debug("Registering controller "+schema);
-			this.$org[schema] = new keyonController(this._root, schema)
+			//this.$org[schema] = new keyonController(this._root, schema)
 
 			// make a shortcut
 			this[schema] = this.$org[schema];
@@ -77,4 +81,4 @@ class keyonSchemas {
 
 }
 
-module.exports = keyonSchemas;
+module.exports = keyonInterfaceControllers;
