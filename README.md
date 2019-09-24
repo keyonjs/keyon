@@ -16,6 +16,17 @@ Installation is done using the
 $ npm install -g keyon
 ```
 
+## Run Unit test
+
+```bash
+$ npm run test
+```
+
+## Generate documentations
+
+```bash
+$ npm run doc
+```
 
 ## Schémas
 
