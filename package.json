@@ -28,6 +28,8 @@
     "doc": "./node_modules/.bin/esdoc",
     "test": "./node_modules/.bin/mocha ./test/index.js"
   },
+  "repository": "https://github.com/keyonjs/keyon",
+  "homepage": "https://github.com/keyonjs/keyon",
   "author": "Michael Vergoz",
   "license": "GPL-2.0-only"
 }
