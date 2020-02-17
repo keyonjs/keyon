@@ -2,7 +2,6 @@ const keyonController = require("../lib/controller");
 const iterator = require("../lib/iterator");
 const debug = require("debug")("keyon:interface:controllers");
 
-
 /**
  * Controller interface management
  *

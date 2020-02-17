@@ -14,7 +14,7 @@ require("./building");
 
 
 describe('Keyon Kernel', function() {
-	it('should register modeled building', function(done) {
+	it('should register modeled schemas', function(done) {
 		keyon.$register(() => {
 			done();
 		});
@@ -42,7 +42,7 @@ describe('Keyon Kernel', function() {
 	});
 
 	// apply instance constraint
-	
+
 	// load roles test
 	require("./role");
 });
